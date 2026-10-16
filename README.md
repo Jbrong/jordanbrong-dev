@@ -29,6 +29,7 @@ curl -I http://localhost:8787/
    title: 'Post title'
    description: 'One-sentence summary, used for the meta description and RSS.'
    pubDate: 2026-10-16
+   draft: true                         # remove (or set false) to publish
    # updatedDate: 2026-10-20          # optional
    # heroImage: ../../assets/foo.jpg  # optional, also used as the social preview image
    ---
@@ -38,6 +39,9 @@ curl -I http://localhost:8787/
 
 3. Put images in `src/assets/` and reference them with a relative path so Astro optimizes them.
 4. Run `npm run dev` and check the post at `http://localhost:4321/blog/<slug>/`.
+5. When it's ready, delete the `draft: true` line, then commit and push.
+
+Drafts appear in `npm run dev` (marked with a badge) but are left out of production builds: no page, and not in listings, RSS, or the sitemap. Committing a draft is safe.
 
 The schema is in `src/content.config.ts`. If the frontmatter is missing a field or has the wrong type, the build fails.
 

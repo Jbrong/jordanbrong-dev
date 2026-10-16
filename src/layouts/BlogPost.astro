@@ -7,9 +7,12 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
 // pubDate is optional so non-post pages (e.g. About) can reuse this layout without a date.
-type Props = Omit<CollectionEntry<'blog'>['data'], 'pubDate'> & { pubDate?: Date };
+type Props = Omit<CollectionEntry<'blog'>['data'], 'pubDate' | 'draft'> & {
+	pubDate?: Date;
+	draft?: boolean;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, draft } = Astro.props;
 ---
 
 <!doctype html>
@@ -51,6 +54,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
+			.draft {
+				display: inline-block;
+				padding: 0.1em 0.6em;
+				font-size: 0.8em;
+				color: var(--accent);
+				border: 1px solid var(--accent);
+				border-radius: 4px;
+			}
 			.last-updated-on {
 				font-style: italic;
 			}
@@ -76,6 +87,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 								)}
 							</div>
 						)}
+						{draft && <p class="draft">Draft: not published</p>}
 						<h1>{title}</h1>
 						<hr />
 					</div>
