@@ -69,6 +69,13 @@ const posts = (await getPosts()).sort(
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
 			}
+			.coming-soon {
+				padding: 4em 0;
+				text-align: center;
+			}
+			.coming-soon p {
+				color: rgb(var(--gray));
+			}
 			@media (max-width: 720px) {
 				ul {
 					gap: 0.5em;
@@ -90,21 +97,31 @@ const posts = (await getPosts()).sort(
 		<Header />
 		<main>
 			<section>
-				<ul>
-					{posts.map((post) => (
-						<li>
-							<a href={`/blog/${post.id}/`}>
-								{post.data.heroImage && (
-									<Image width={720} height={360} src={post.data.heroImage} alt="" />
-								)}
-								<h4 class="title">{post.data.title}</h4>
-								<p class="date">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-							</a>
-						</li>
-					))}
-				</ul>
+				{posts.length === 0 ? (
+					<div class="coming-soon">
+						<h1>Coming soon</h1>
+						<p>
+							The first posts are on the way. Subscribe via <a href="/rss.xml">RSS</a> to get them
+							when they land.
+						</p>
+					</div>
+				) : (
+					<ul>
+						{posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									{post.data.heroImage && (
+										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+									)}
+									<h4 class="title">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))}
+					</ul>
+				)}
 			</section>
 		</main>
 		<Footer />

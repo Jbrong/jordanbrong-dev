@@ -43,17 +43,25 @@ const posts = (await getPosts())
 				workflows, AWS security, infrastructure evals, and hands-on experiments.
 			</p>
 			<h2>Recent posts</h2>
-			<ul class="posts">
-				{
-					posts.map((post) => (
-						<li>
-							<FormattedDate date={post.data.pubDate} />
-							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-						</li>
-					))
-				}
-			</ul>
-			<p><a href="/blog">All posts →</a></p>
+			{
+				posts.length === 0 ? (
+					<p>First posts coming soon.</p>
+				) : (
+					<>
+						<ul class="posts">
+							{posts.map((post) => (
+								<li>
+									<FormattedDate date={post.data.pubDate} />
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								</li>
+							))}
+						</ul>
+						<p>
+							<a href="/blog">All posts →</a>
+						</p>
+					</>
+				)
+			}
 		</main>
 		<Footer />
 	</body>
