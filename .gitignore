@@ -26,3 +26,6 @@ pnpm-debug.log*
 # wrangler local state and secrets
 .wrangler/
 .dev.vars*
+
+# Obsidian vault settings (vault is opened at src/)
+.obsidian/
