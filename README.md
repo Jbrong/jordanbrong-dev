@@ -45,6 +45,32 @@ Drafts appear in `npm run dev` (marked with a badge) but are left out of product
 
 The schema is in `src/content.config.ts`. If the frontmatter is missing a field or has the wrong type, the build fails.
 
+## Publishing from the Obsidian drafts vault
+
+Drafts live in an iCloud Obsidian vault whose folders mirror `src/`:
+
+```
+iCloud Drive/Obsidian/Blog Drafts/jordanbrong-dev/
+├── content/blog/   drafts
+├── assets/         their images
+└── _published/     drafts the script has already published
+```
+
+To publish one:
+
+```bash
+npm run publish-draft -- "My Post"            # file name in content/blog/, or a full path
+npm run publish-draft -- "My Post" --dry-run  # show the plan, change nothing
+npm run publish-draft -- "My Post" --no-push  # commit locally, don't push or archive
+```
+
+The script pulls `master`, checks the frontmatter, copies the post and the images it uses, removes
+`draft: true`, and runs the build. If the build fails, it removes the copied files and stops.
+If the build passes, it commits only those files, pushes (which deploys), and moves the draft into `_published/`.
+File names are made URL-safe (`Pasted image 1.png` becomes `pasted-image-1.png`), and links are updated to match.
+It refuses to overwrite a post that's already published; edit those in the repo.
+Set `BLOG_DRAFTS_DIR` to use a different drafts folder.
+
 ## Publishing
 
 Open a PR. GitHub Actions runs `npm ci && npm run build`, and Cloudflare Workers Builds posts a preview URL for the branch. Merge to `master` to deploy to production.
@@ -70,6 +96,7 @@ curl -sI https://jordanbrong.dev/ | grep -iE 'strict-transport|content-security|
 
 ```
 public/_headers          security headers (copied into dist/)
+scripts/publish-draft.mjs  publish a draft from the Obsidian vault
 src/consts.ts            site title, description, author, social links
 src/content/blog/        posts
 src/pages/               routes (home, blog index, about, 404, rss.xml)

@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro build && wrangler dev",
     "deploy": "astro build && wrangler deploy",
-    "astro": "astro"
+    "astro": "astro",
+    "publish-draft": "node scripts/publish-draft.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.0",
