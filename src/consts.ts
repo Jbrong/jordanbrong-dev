@@ -10,8 +10,7 @@ export const AUTHOR_NAME = 'Jordan Brong';
 export type SocialIcon = 'github' | 'linkedin' | 'rss';
 
 export const SOCIAL_LINKS: { label: string; href: string; icon: SocialIcon }[] = [
-	// TODO(jordan): uncomment and fill in your profile URLs.
-	// { label: 'GitHub', href: 'https://github.com/TODO', icon: 'github' },
-	// { label: 'LinkedIn', href: 'https://www.linkedin.com/in/TODO', icon: 'linkedin' },
+	{ label: 'GitHub', href: 'https://github.com/Jbrong', icon: 'github' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jordan-brong', icon: 'linkedin' },
 	{ label: 'RSS feed', href: '/rss.xml', icon: 'rss' },
 ];
