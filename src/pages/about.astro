@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+import { AUTHOR_NAME } from '../consts';
+---
+
+<Layout title="About" description={`About ${AUTHOR_NAME}`}>
+	<!-- TODO(jordan): write your bio: background, what you work on, how to reach you. -->
+	<p>
+		I'm {AUTHOR_NAME}, a DevOps engineer moving toward cloud security. This site is where I write
+		up what I learn about securing agentic workflows, AWS, and infrastructure.
+	</p>
+</Layout>
